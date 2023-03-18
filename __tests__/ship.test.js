@@ -2,11 +2,11 @@ const Ship = require('../src/ship.js');
 const ship = new Ship('Leeds');
 
 describe('Ship', () => {
-    test('creating the ship', () => { 
+    test('creating the ship', () => {
 
-    expect(new Ship()).toBeInstanceOf(Object);
-});
-    
+        expect(new Ship()).toBeInstanceOf(Object);
+    });
+
     test('has a starting port', () => {
         const ship = new Ship('Leeds');
 
