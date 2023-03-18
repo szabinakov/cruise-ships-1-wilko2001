@@ -1,5 +1,9 @@
+const Port = require('../src/port.js');
+const leedsPort = new Port('Leeds');
 const Ship = require('../src/ship.js');
-const ship = new Ship('Leeds');
+const santaCruize = new Ship(leedsPort);
+
+
 
 describe('Ship', () => {
     test('creating the ship', () => {
@@ -8,16 +12,24 @@ describe('Ship', () => {
     });
 
     test('has a starting port', () => {
-        const ship = new Ship('Leeds');
 
-        expect(ship.startingPort).toEqual('Leeds');
+        expect(santaCruize.currentPort).toEqual(leedsPort);
     });
 
     test('set sail', () => {
-        const ship = new Ship('Leeds');
+        const port = new Port('Leeds');
+        const ship = new Ship('Port');
 
         ship.setSail();
 
-        expect(ship.startingPort).toBeFalsy();
+        expect(ship.currentPort).toBeFalsy();
+    })
+
+    test('ship can dock to a different port', () => {
+        const greecePort = new Port('Greece');
+
+        santaCruize.dock(greecePort);
+        
+        expect(santaCruize.currentPort).toEqual(greecePort);
     })
 });
