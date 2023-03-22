@@ -1,15 +1,48 @@
 const Port = require('../src/port.js');
 
 describe('Port', () => {
-    test('creating a port', () => {
+    describe('with ports and ships', () => {
+        let port;
+        let leedsPort;
+        let ships;
+        let harkanShip;
+        let emmaShip;
 
-        expect(new Port()).toBeInstanceOf(Object);
-    })
+        beforeEach(() => {
+            port = new Port('myPort');
+            leedsPort = new Port('Leeds');
+            ships = {};
+            harkanShip = {isShipBest: false};
+            emmaShip = {isShipBest: true};
+        });
 
-    test('find the name of a port', () => {
 
-        leedsPort = new Port('Leeds');
+        test('creating a port', () => {
 
-        expect(leedsPort.name).toEqual('Leeds');
-    })
-})
+            expect(new Port()).toBeInstanceOf(Object);
+        })
+
+        test('find the name of a port', () => {
+
+            expect(leedsPort.name).toEqual('Leeds');
+        })
+
+        test('adds ships to the port', () => {
+
+            port.addShip(emmaShip);
+            port.addShip(harkanShip);
+
+            expect(port.ships).toContain(emmaShip, harkanShip);
+        })
+
+        test('removes ships from the port', () => {
+
+            port.addShip(emmaShip);
+            port.addShip(harkanShip);
+
+            port.removeShip(emmaShip);
+
+            expect(port.ships).toEqual([harkanShip]);
+        })
+    });
+});
