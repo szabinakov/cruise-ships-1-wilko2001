@@ -11,9 +11,9 @@ describe('Port', () => {
         beforeEach(() => {
             port = new Port('myPort');
             leedsPort = new Port('Leeds');
-            ships = {};
-            harkanShip = {isShipBest: false};
-            emmaShip = {isShipBest: true};
+            ships = jest.fn();
+            harkanShip = jest.fn();
+            emmaShip = jest.fn();
         });
 
 
