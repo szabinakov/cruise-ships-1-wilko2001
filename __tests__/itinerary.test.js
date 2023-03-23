@@ -13,7 +13,7 @@ describe('itinerary of ship', () => {
         const leedsPort =  new Port('Leeds');
         const greecePort = new Port('Greece');
         
-        const itinerary = new Itinerary([leedsPort, greecePort]);
+        itinerary = new Itinerary([leedsPort, greecePort]);
 
         expect(itinerary.ports).toEqual([leedsPort, greecePort]);
     });
