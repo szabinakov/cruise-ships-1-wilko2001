@@ -12,11 +12,23 @@ describe('Ship', () => {
         let itinerary;
 
         beforeEach(() => {
-            leedsPort = new Port('Leeds');
-            greecePort = new Port('Greece');
+            leedsPort = {
+                addShip: jest.fn(),
+                removeShip: jest.fn(),
+                name: 'Leeds',
+                ships: [],
+            };
+            greecePort = {
+                addShip: jest.fn(),
+                removeShip: jest.fn(),
+                name: 'Greece',
+                ships: [],
+            };
             itinerary = new Itinerary([leedsPort, greecePort]);
             santaCruize = new Ship(itinerary);
+
         });
+
 
 
         test('creating the ship', () => {
@@ -34,7 +46,7 @@ describe('Ship', () => {
             santaCruize.setSail();
 
             expect(santaCruize.currentPort).toBeFalsy();
-            expect(leedsPort.ships).not.toContain(santaCruize);
+            expect(leedsPort.removeShip).toHaveBeenCalledWith(santaCruize);
         })
 
         test('ship can dock to a different port', () => {
@@ -45,13 +57,13 @@ describe('Ship', () => {
 
 
             expect(santaCruize.currentPort).toEqual(greecePort);
-            expect(greecePort.ships).toContain(santaCruize);
+            expect(greecePort.addShip).toHaveBeenCalledWith(santaCruize);
 
         })
 
         test('gets added to port on instantiation', () => {
 
-            expect(leedsPort.ships).toContain(santaCruize);
+            expect(leedsPort.addShip).toHaveBeenCalledWith(santaCruize);
         });
 
         test('cannot sail further than itinerary', () => {
